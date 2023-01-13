@@ -1,53 +1,68 @@
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+  Box,
+} from "@mui/material";
+
+import { BasicTableInf, ProductsInf } from "./interfaces";
+import { Link } from "react-router-dom";
 
 export default function BasicTable({
   products,
   handleShowModal,
   filterProductsToModal,
-}: any) {
+}: BasicTableInf) {
   return (
-    <TableContainer component={Paper}>
-      <Table
-        sx={{
-          maxWidth: 650,
-        }}
-        aria-label="simple table"
-      >
-        <TableHead>
-          <TableRow>
-            <TableCell align="right">ID</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Year</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {products &&
-            products.map((item: any, index: number) => (
-              <TableRow
-                key={item.name}
-                sx={{ background: item.color, cursor: "pointer" }}
-                onClick={() => {
-                  handleShowModal();
-                  filterProductsToModal(item.id);
-                }}
-              >
-                <TableCell sx={{ border: 0 }} align="right">
-                  {item.id}
-                </TableCell>
-                <TableCell sx={{ border: 0 }}>{item.name}</TableCell>
-                <TableCell sx={{ border: 0 }} align="right">
-                  {item.year}
-                </TableCell>
-              </TableRow>
-            ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Box width="100%">
+      {products?.length === 1 && (
+        <Link
+          to="/products"
+          style={{
+            textDecoration: "none",
+            display: "flex",
+          }}
+        >
+          <Button sx={{ marginLeft: "auto" }}>reset</Button>
+        </Link>
+      )}
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align="right">ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell align="right">Year</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {products &&
+              products?.map((item: ProductsInf) => (
+                <TableRow
+                  key={item.name}
+                  sx={{ background: item.color, cursor: "pointer" }}
+                  onClick={() => {
+                    handleShowModal();
+                    filterProductsToModal(item.id);
+                  }}
+                >
+                  <TableCell sx={{ border: 0 }} align="right">
+                    {item.id}
+                  </TableCell>
+                  <TableCell sx={{ border: 0 }}>{item.name}</TableCell>
+                  <TableCell sx={{ border: 0 }} align="right">
+                    {item.year}
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 }

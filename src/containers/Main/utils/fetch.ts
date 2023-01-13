@@ -1,24 +1,11 @@
 import axios from "axios";
 
-type GetUsersResponse = {
-  color: string;
-  id: number;
-  name: string;
-  pantone_value: string;
-  year: number;
-};
-
-interface userResponse {
-  data: GetUsersResponse[];
-}
 export const fetchProducts = async (page: string | null, id: string | null) => {
   try {
-    const { data, status } = await axios.get<userResponse>(
+    const { data } = await axios.get(
       `https://reqres.in/api/products?per_page=5
       ${page && `&page=${page}`}
-      ${id && `&id=${id}`}
-
-      `,
+      ${id && `&id=${id}`}`,
       {
         headers: {
           Accept: "application/json",

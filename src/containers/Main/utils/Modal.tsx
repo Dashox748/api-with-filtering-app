@@ -1,10 +1,10 @@
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import { Box, Typography, DialogContent } from "@mui/material";
-const style = {};
-const Modal = ({ handleShowModal, modalProduct }: any) => {
+import { ModalProductInf } from "./interfaces";
+const Modal = ({ handleShowModal, modalProduct }: ModalProductInf) => {
   return (
-    <Dialog open={true} onClose={handleShowModal} sx={style}>
+    <Dialog open={true} onClose={handleShowModal}>
       <DialogContent sx={{ background: "white" }}>
         <DialogTitle
           sx={{
